@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Combinatorics Interactive Tutorial</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; background: #fff; }
+        h1 { color: #333; }
+        .step { margin-bottom: 20px; }
+        button { padding: 10px 15px; cursor: pointer; }
+        .result { margin-top: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Harry Potter Combinatorics Interactive Tutorial</h1>
+        <div class="step" id="step-1">
+            <h2>Step 1: Choose Your Houses</h2>
+            <button onclick="chooseHouses()">Choose Houses</button>
+            <div class="result" id="result-1"></div>
+        </div>
+        <div class="step" id="step-2" style="display:none;">
+            <h2>Step 2: Calculate Combinations</h2>
+            <button onclick="calculateCombinations()">Calculate Combinations</button>
+            <div class="result" id="result-2"></div>
+        </div>
+        <div class="step" id="step-3" style="display:none;">
+            <h2>Step 3: Display Results</h2>
+            <button onclick="displayResults()">Display Results</button>
+            <div class="result" id="result-3"></div>
+        </div>
+        <script>
+            let houses = [];
+            function chooseHouses() {
+                houses = ['Gryffindor', 'Hufflepuff', 'Ravenclaw', 'Slytherin'];
+                document.getElementById('result-1').innerText = 'Chosen Houses: ' + houses.join(', ');
+                document.getElementById('step-2').style.display = 'block';
+            }
+            function calculateCombinations() {
+                const combinations = (n, r) => { /* Simple combination formula */ return factorial(n) / (factorial(r) * factorial(n - r)); };
+                let combinationsResult = combinations(houses.length, 2);
+                document.getElementById('result-2').innerText = 'Combinations of houses: ' + combinationsResult;
+                document.getElementById('step-3').style.display = 'block';
+            }
+            function displayResults() {
+                const results = 'You can form ' + (houses.length * (houses.length - 1) / 2) + ' combinations of houses.';
+                document.getElementById('result-3').innerText = results;
+            }
+            function factorial(x) {
+                if (x <= 1) return 1;
+                return x * factorial(x - 1);
+            }
+        </script>
+    </div>
+</body>
+</html>
